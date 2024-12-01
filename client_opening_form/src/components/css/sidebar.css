@@ -1,0 +1,29 @@
+/* src/components/sidebar.css */
+.sidebar {
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .sidebar--collapsed {
+    width: 80px;
+  }
+  
+  .sidebar--expanded {
+    width: 240px;
+  }
+  
+  .sidebar__link {
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  .sidebar__link:hover {
+    background-color: #2d3748; /* Tailwind's hover:bg-gray-700 */
+  }
+  
+  .sidebar__icon {
+    margin-right: 10px;
+  }
+  
