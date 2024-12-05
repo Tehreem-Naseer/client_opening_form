@@ -9,25 +9,37 @@ const AdminLogin = ({ onLogin }) => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    navigate('/');
-
-    /*if (!email || !password) {
+    if (!email || !password) {
       setError('Please fill in all fields.');
       return;
     }
 
-    const isAuthenticated = email === 'admin@example.com' && password === 'password123';
-    
-    if (isAuthenticated) {
-      setError('');
-      onLogin('admin'); // Set user role to admin
+    // Authentication logic (example with API call)
+    try {
+
+      onLogin('admin'); 
       navigate('/admin/dashboard');
-    } else {
-      setError('Invalid login credentials');
-    }*/
+
+    /*  const response = await fetch('/api/admin/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await response.json();
+      if (data.success) {
+        setError('');
+        onLogin('admin'); // Set user role to admin
+        navigate('/admin/dashboard');
+      } else {
+        setError(data.message || 'Invalid login credentials');
+      }*/
+    } catch (err) {
+      setError('Something went wrong. Please try again.');
+    }
   };
 
   return (
@@ -48,6 +60,7 @@ const AdminLogin = ({ onLogin }) => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Enter your email"
+                  aria-label="Email"
                   required
                   className="w-full py-2 px-3 focus:outline-none focus:border-blue-500"
                 />
@@ -62,6 +75,7 @@ const AdminLogin = ({ onLogin }) => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Enter your password"
+                  aria-label="Password"
                   required
                   className="w-full py-2 px-3 focus:outline-none"
                 />
@@ -72,7 +86,10 @@ const AdminLogin = ({ onLogin }) => {
 
             <button
               type="submit"
-              className="w-full py-2 px-4 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              disabled={!email || !password}
+              className={`w-full py-2 px-4 font-semibold rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                !email || !password ? 'bg-gray-300 text-gray-500' : 'bg-blue-500 text-white hover:bg-blue-600'
+              }`}
             >
               Login
             </button>

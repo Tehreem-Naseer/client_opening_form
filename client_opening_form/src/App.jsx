@@ -11,18 +11,26 @@ import OtpResend from './components/Forms/OtpResend';
 import ApplicationStatus from './components/Forms/ApplicationStatus';
 import AdminLogin from './components/AdminPanel/AdminLogin.jsx';
 import AdminDashboard from './components/AdminPanel/AdminDashboard'; // Admin Dashboard Component
+import AdminSidebar from './components/AdminPanel/AdminSidebar.jsx';
+import ClientKyc from './components/AdminPanel/ClientKyc.jsx';
+import ClientOtp from './components/AdminPanel/ClientOtp.jsx';
+import ClientUkn from './components/AdminPanel/ClientUkn.jsx';
 
 const App = () => {
-  const [userRole, setUserRole] = useState(null); // Track user role: "client" or "admin"
+  const [userRole, setUserRole] = useState(() => {
+    return localStorage.getItem('userRole') || null;
+  }); // Track user role: "client" or "admin"
 
   // Handle login for different roles
   const handleLogin = (role) => {
     setUserRole(role); // Set user role to "client" or "admin"
+    localStorage.setItem('userRole', role); // Save to localStorage
   };
 
   // Logout function
   const handleLogout = () => {
     setUserRole(null); // Clear role and return to login page
+    localStorage.removeItem('userRole'); // Remove from localStorage
   };
 
   return (
@@ -43,7 +51,8 @@ const App = () => {
           <Sidebar onLogout={handleLogout} /> {/* Pass logout to Sidebar */}
           <div className="flex-1 p-8">
             <Routes>
-              {/* Client-Specific Routes */}
+              { console.log(userRole)
+              /* Client-Specific Routes */}
               <Route path="/" element={<Navigate to="/profile" />} />
               <Route path="/profile" element={<BasicDetail />} />
               <Route path="/contact" element={<ContactDetail />} />
@@ -53,13 +62,17 @@ const App = () => {
         </div>
       ) : (
         <div className="flex">
-          <Sidebar onLogout={handleLogout} /> {/* Admin Sidebar */}
+          <AdminSidebar onLogout={handleLogout} /> {/* Admin Sidebar */}
           <div className="flex-1 p-8">
             <Routes>
-              {/* Admin-Specific Routes */}
+              {
+                 console.log(userRole)
+              /* Admin-Specific Routes */}
               <Route path="/admin/dashboard" element={<AdminDashboard />} />
-              <Route path="/kyc" element={<BasicDetail />} />
-              <Route path="/ukn" element={<ContactDetail />} />
+              <Route path="/admin/otp" element={<ClientOtp />} />
+              <Route path="/admin/kyc" element={<ClientKyc />} />
+              <Route path="/admin/ukn" element={<ClientUkn />} />
+
               {/* Add more admin-specific routes */}
             </Routes>
           </div>

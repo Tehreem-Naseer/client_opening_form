@@ -22,7 +22,7 @@ const AdminSidebar = () => {
         {isOpen ? 'Close' : 'Open'}
       </button>
 
-      <div className="p-6 text-center text-2xl font-bold">My App</div>
+      <div className="p-6 text-center text-2xl font-bold">Admin Interface</div>
 
       {/* Navigation Links */}
       <div className="flex-grow">
@@ -41,7 +41,7 @@ const AdminSidebar = () => {
           {/* Home Link */}
           <li>
             <Link
-              to="/admin/dashboard"
+              to="/admin/otp"
               className="flex items-center space-x-4 p-3 hover:bg-gray-700 rounded-md transition-colors"
             >
               <FaHome className="text-xl" />
@@ -52,7 +52,7 @@ const AdminSidebar = () => {
           {/* Profile Link */}
           <li>
             <Link
-              to="/kyc"
+              to="/admin/kyc"
               className="flex items-center space-x-4 p-3 hover:bg-gray-700 rounded-md transition-colors"
             >
               <FaUser className="text-xl" />
@@ -63,7 +63,7 @@ const AdminSidebar = () => {
           {/* Contact Link */}
           <li>
             <Link
-              to="/ukn"
+              to="/admin/ukn"
               className="flex items-center space-x-4 p-3 hover:bg-gray-700 rounded-md transition-colors"
             >
               <FaEnvelope className="text-xl" />

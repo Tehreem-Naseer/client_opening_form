@@ -16,6 +16,7 @@ const LoginForm = () => {
   // Handle form submission (you can replace this with actual logic later)
   const handleSubmit = (e) => {
     e.preventDefault();
+    onLogin("client")
     console.log({ email, password, rememberMe });
   };
 
